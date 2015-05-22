@@ -140,7 +140,7 @@ static GstStaticPadTemplate mpegtsmux_sink_factory =
         "mute = (boolean) { FALSE, TRUE }; "
         "audio/x-ac3, framed = (boolean) TRUE;"
         "audio/x-dts, framed = (boolean) TRUE;"
-        "subpicture/x-dvb;" "application/x-teletext"));
+        "subpicture/x-dvb;" "application/x-teletext;" "text/x-raw;"));
 
 static GstStaticPadTemplate mpegtsmux_src_factory =
 GST_STATIC_PAD_TEMPLATE ("src",

@@ -51,6 +51,7 @@
 #define ST_PS_AUDIO_DTS                 0x8a
 #define ST_PS_AUDIO_LPCM                0x8b
 #define ST_PS_DVD_SUBPICTURE            0xff
+#define ST_PS_TX3G                      0x1d
 
 /* Blu-ray related (registration: 'HDMV'*/
 #define ST_BD_AUDIO_LPCM                0x80

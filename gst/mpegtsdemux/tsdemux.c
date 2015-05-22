@@ -236,6 +236,10 @@ struct _TSDemuxStream
 #define SUBPICTURE_CAPS \
     GST_STATIC_CAPS ("subpicture/x-pgs; subpicture/x-dvd")
 
+#define SUBTITLE_CAPS \
+    GST_STATIC_CAPS ("text/x-raw")
+
+
 static GstStaticPadTemplate video_template =
 GST_STATIC_PAD_TEMPLATE ("video_%04x", GST_PAD_SRC,
     GST_PAD_SOMETIMES,
@@ -252,6 +256,12 @@ GST_STATIC_PAD_TEMPLATE ("subpicture_%04x",
     GST_PAD_SRC,
     GST_PAD_SOMETIMES,
     SUBPICTURE_CAPS);
+
+static GstStaticPadTemplate subtitle_template =
+GST_STATIC_PAD_TEMPLATE ("subtitle_%04x",
+    GST_PAD_SRC,
+    GST_PAD_SOMETIMES,
+    SUBTITLE_CAPS);
 
 static GstStaticPadTemplate private_template =
 GST_STATIC_PAD_TEMPLATE ("private_%04x",
@@ -1347,6 +1357,12 @@ create_pad_for_stream (MpegTSBase * base, MpegTSBaseStream * bstream,
       template = gst_static_pad_template_get (&subpicture_template);
       name = g_strdup_printf ("subpicture_%04x", bstream->pid);
       caps = gst_caps_new_empty_simple ("subpicture/x-dvd");
+      sparse = TRUE;
+      break;
+    case ST_PS_TX3G:
+      template = gst_static_pad_template_get (&subtitle_template);
+      name = g_strdup_printf ("subtitle_%04x", bstream->pid);
+      caps = gst_caps_new_empty_simple ("text/x-raw");
       sparse = TRUE;
       break;
     default:

@@ -177,6 +177,10 @@ tsmux_stream_new (guint16 pid, TsMuxStreamType stream_type)
           TSMUX_PACKET_FLAG_PES_FULL_HEADER |
           TSMUX_PACKET_FLAG_PES_EXT_STREAMID;
       break;
+    case TSMUX_ST_PS_TX3G:
+      stream->id = 0xBD;
+      stream->pi.flags |= TSMUX_PACKET_FLAG_PES_FULL_HEADER;
+      break;
     case TSMUX_ST_PS_TELETEXT:
       /* needs fixes PES header length */
       stream->pi.pes_header_length = 36;
@@ -880,6 +884,10 @@ tsmux_stream_get_es_descrs (TsMuxStream * stream,
 
       g_ptr_array_add (pmt_stream->descriptors, descriptor);
       break;
+    case TSMUX_ST_PS_TX3G:
+      /* FIXME empty descriptor for now; */
+      break;
+
     case TSMUX_ST_PS_DVB_SUBPICTURE:
       /* falltrough ...
        * that should never happen anyway as
